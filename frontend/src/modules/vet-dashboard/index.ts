@@ -1,1 +1,8 @@
 export { VetDashboardApp } from './VetDashboardApp'
+export { DashboardLayout } from './components/DashboardLayout'
+export { OverviewPage } from './pages/OverviewPage'
+export { RiskMapPage } from './pages/RiskMapPage'
+export { HealthEventsPage } from './pages/HealthEventsPage'
+export { AlertsPage } from './pages/AlertsPage'
+export { EventDetailsPage } from './pages/EventDetailsPage'
+export { ClusterDetailsPage } from './pages/ClusterDetailsPage'

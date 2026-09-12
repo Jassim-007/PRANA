@@ -1,5 +1,13 @@
 import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
-import { VetDashboardApp } from './modules/vet-dashboard'
+import {
+  AlertsPage,
+  ClusterDetailsPage,
+  DashboardLayout,
+  EventDetailsPage,
+  HealthEventsPage,
+  OverviewPage,
+  RiskMapPage,
+} from './modules/vet-dashboard'
 
 function Home() {
   return (
@@ -28,8 +36,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/vet/*" element={<VetDashboardApp />} />
         <Route path="/dashboard" element={<Navigate to="/vet" replace />} />
+        <Route path="/vet" element={<DashboardLayout />}>
+          <Route index element={<OverviewPage />} />
+          <Route path="map" element={<RiskMapPage />} />
+          <Route path="events" element={<HealthEventsPage />} />
+          <Route path="events/:id" element={<EventDetailsPage />} />
+          <Route path="alerts" element={<AlertsPage />} />
+          <Route path="clusters/:id" element={<ClusterDetailsPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
