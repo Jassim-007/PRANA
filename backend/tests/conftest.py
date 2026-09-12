@@ -1,6 +1,14 @@
+import sys
+from pathlib import Path
+
 import pytest
 
 from backend.app.database.connection import get_connection, test_database_connection
+
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 
 def db_available() -> bool:

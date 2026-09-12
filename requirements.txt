@@ -4,3 +4,5 @@ psycopg[binary]
 python-dotenv
 pytest
 httpx
+scikit-learn
+numpy

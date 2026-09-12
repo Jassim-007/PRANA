@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -10,6 +10,7 @@ class AIAnalyzeRequest(BaseModel):
     symptoms: List[str]
     affected_count: int = Field(default=0, ge=0)
     death_count: int = Field(default=0, ge=0)
+    duration_days: Optional[int] = None
 
     @field_validator("species")
     @classmethod
