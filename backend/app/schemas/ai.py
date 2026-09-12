@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 
 class AIAnalyzeRequest(BaseModel):
@@ -7,3 +7,4 @@ class AIAnalyzeRequest(BaseModel):
     symptoms: List[str]
     affected_count: int = 0
     death_count: int = 0
+    duration_days: Optional[int] = None

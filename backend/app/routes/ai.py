@@ -17,6 +17,7 @@ def analyze(request: AIAnalyzeRequest):
         symptoms=request.symptoms,
         affected_count=request.affected_count,
         death_count=request.death_count,
+        duration_days=request.duration_days,
     )
 
     return result
