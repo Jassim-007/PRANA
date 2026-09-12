@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { analyzeHealthEvent, createHealthEvent } from '../api/healthEvents'
+import { createHealthEvent } from '../api/healthEvents'
 import { PrimaryButton } from '../components/PrimaryButton'
 import { StepHeader } from '../components/StepHeader'
 import { useFarmerReport } from '../context/ReportContext'
@@ -18,57 +18,51 @@ export function ReviewPage() {
   }
 
   async function submit() {
-    if (!draft.species || draft.latitude == null || draft.longitude == null) return
-    setSubmitting(true)
-    setError(null)
+  if (!draft.species || draft.latitude == null || draft.longitude == null) return
 
-    const payload: HealthEventCreateRequest = {
-      farm_id: draft.farmId || 'F001',
-      source: 'farmer',
-      species: draft.species,
-      event_type: 'illness',
-      symptoms: draft.symptoms,
-      affected_count: draft.affectedCount,
-      death_count: draft.deathCount,
-      duration_days: draft.durationDays,
-      latitude: draft.latitude,
-      longitude: draft.longitude,
-    }
+  setSubmitting(true)
+  setError(null)
 
-    const notes = draft.notes.trim()
-    if (notes) payload.notes = notes
-
-    try {
-      const event = await createHealthEvent(payload)
-      let analysis = null
-      if (event.risk || event.prediction) {
-        analysis = {
-          prediction: event.prediction ?? { disease: 'Unknown', confidence: 0 },
-          risk: event.risk ?? { score: 0, level: 'LOW' },
-          zoonotic: event.zoonotic ?? { flag: false },
-          explanation: event.explanation ?? [],
-        }
-      } else {
-        try {
-          analysis = await analyzeHealthEvent({
-            species: payload.species,
-            symptoms: payload.symptoms,
-            affected_count: payload.affected_count,
-            death_count: payload.death_count,
-          })
-        } catch {
-          analysis = null
-        }
-      }
-      setResult({ event, analysis })
-      navigate('/farmer/confirmation')
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not send the report.')
-    } finally {
-      setSubmitting(false)
-    }
+  const payload: HealthEventCreateRequest = {
+    farm_id: '14c0419a-86b6-4e48-a105-ffc748bb1c38',
+    source: 'farmer',
+    species: draft.species,
+    event_type: 'illness',
+    symptoms: draft.symptoms,
+    affected_count: draft.affectedCount,
+    death_count: draft.deathCount,
+    duration_days: draft.durationDays,
+    latitude: draft.latitude,
+    longitude: draft.longitude,
   }
 
+  const notes = draft.notes.trim()
+  if (notes) {
+    payload.notes = notes
+  }
+
+  try {
+    const event = await createHealthEvent(payload)
+
+const analysis = {
+  prediction: event.prediction ?? { disease: 'Unknown', confidence: 0 },
+  risk: event.risk ?? { score: 0, level: 'LOW' },
+  zoonotic: event.zoonotic ?? { flag: false },
+  explanation: event.explanation ?? [],
+}
+
+    setResult({ event, analysis })
+    navigate('/farmer/confirmation')
+  } catch (err) {
+    setError(
+      err instanceof Error
+        ? err.message
+        : 'Could not send the report.'
+    )
+  } finally {
+    setSubmitting(false)
+  }
+}
   return (
     <div>
       <StepHeader
