@@ -13,8 +13,8 @@ def list_field_workers() -> list[dict]:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, name, phone, region, assigned_area, status, created_at
-                    FROM field_workers
+                    SELECT worker_code, name, phone, region, assigned_area, status, created_at
+FROM field_workers
                     ORDER BY name
                     """
                 )
@@ -25,16 +25,27 @@ def list_field_workers() -> list[dict]:
         raise_database_http_error(exc, "Could not load field workers")
 
 
-def list_assigned_farms(field_worker_id: UUID) -> dict | None:
+def list_assigned_farms(field_worker_code: str) -> dict | None:
     try:
         with get_connection() as conn:
             with conn.cursor() as cur:
+                # Resolve public worker code (e.g. FW001)
+                # to the internal UUID.
                 cur.execute(
-                    "SELECT id FROM field_workers WHERE id = %s",
-                    (field_worker_id,),
+                    """
+                    SELECT id
+                    FROM field_workers
+                    WHERE worker_code = %s
+                    """,
+                    (field_worker_code,),
                 )
-                if cur.fetchone() is None:
+
+                worker = cur.fetchone()
+
+                if worker is None:
                     return None
+
+                field_worker_id = worker[0]
 
                 cur.execute(
                     """
@@ -49,6 +60,7 @@ def list_assigned_farms(field_worker_id: UUID) -> dict | None:
                     """,
                     (field_worker_id,),
                 )
+
                 rows = cur.fetchall()
 
         farms = [
@@ -67,7 +79,9 @@ def list_assigned_farms(field_worker_id: UUID) -> dict | None:
             }
             for row in rows
         ]
+
         return {"farms": farms}
+
     except Exception as exc:
         logger.exception("Failed to load field worker farms")
         raise_database_http_error(exc, "Could not load assigned farms")
