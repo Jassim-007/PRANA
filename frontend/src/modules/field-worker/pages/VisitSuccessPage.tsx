@@ -19,32 +19,32 @@ export function VisitSuccessPage() {
       subtitle={state.farmName ?? farmId}
       backTo={`${FIELD_WORKER_BASE}/farms`}
     >
-      <div className="rounded-2xl bg-emerald-500/15 p-6 text-center">
-        <p className="text-sm font-semibold uppercase tracking-wide text-emerald-300">
+      <div className="animate-scale-in rounded-2xl bg-[#C1EDCC]/30 p-6 text-center">
+        <p className="font-ui text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
           Submission successful
         </p>
-        <p className="mt-3 text-xl font-bold text-white">
+        <p className="mt-3 font-display text-xl font-bold text-[#262322]">
           {state.message ?? 'Health event created successfully'}
         </p>
         {state.eventId ? (
-          <p className="mt-3 font-mono text-sm text-emerald-200">Event ID: {state.eventId}</p>
+          <p className="mt-3 font-mono text-sm text-emerald-800">Event ID: {state.eventId}</p>
         ) : null}
       </div>
 
-      <p className="mt-6 rounded-2xl bg-slate-900 p-4 text-sm text-slate-300">
+      <p className="mt-6 rounded-2xl border border-stone-200 bg-white p-4 font-body text-sm text-stone-600">
         {DECISION_SUPPORT_NOTICE}
       </p>
 
       <div className="mt-6 grid gap-3">
         <Link
           to={`${FIELD_WORKER_BASE}/farms/${encodeURIComponent(farmId)}/visit`}
-          className="flex min-h-14 items-center justify-center rounded-2xl bg-slate-800 font-bold"
+          className="prana-btn border border-stone-200 bg-white text-[#262322] hover:bg-stone-50"
         >
           Record another event
         </Link>
         <Link
           to={`${FIELD_WORKER_BASE}/farms`}
-          className="flex min-h-14 items-center justify-center rounded-2xl bg-emerald-500 font-bold text-slate-950"
+          className="prana-btn prana-btn-primary"
         >
           Back to assigned farms
         </Link>

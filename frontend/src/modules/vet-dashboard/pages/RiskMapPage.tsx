@@ -34,8 +34,8 @@ export function RiskMapPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-2xl font-semibold text-slate-900">Risk map</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[#262322]">Risk map</h2>
+        <p className="mt-1 font-body text-sm text-stone-600">
           Health events are plotted by latitude and longitude. Circles mark potential outbreak clusters when coordinates are provided.
         </p>
       </div>

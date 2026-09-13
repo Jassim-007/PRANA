@@ -16,8 +16,21 @@ class HealthEventCreate(BaseModel):
     death_count: int = Field(default=0, ge=0)
     duration_days: Optional[int] = Field(default=None, ge=0, le=3650)
     notes: Optional[str] = None
+    # Optional photo, sent by the frontend as a base64 data URL
+    # (e.g. "data:image/jpeg;base64,...."). Entirely optional and
+    # additive — omitting it does not change any existing behavior.
+    photo_base64: Optional[str] = Field(default=None, max_length=8_000_000)
     latitude: Optional[float] = Field(default=None, ge=-90, le=90)
     longitude: Optional[float] = Field(default=None, ge=-180, le=180)
+
+    @field_validator("photo_base64")
+    @classmethod
+    def validate_photo(cls, value: Optional[str]) -> Optional[str]:
+        if value is None or value == "":
+            return None
+        if not value.startswith("data:image/"):
+            raise ValueError("photo_base64 must be an image data URL")
+        return value
 
     @field_validator("source")
     @classmethod
@@ -58,6 +71,7 @@ class HealthEventResponse(BaseModel):
     death_count: int = 0
     duration_days: Optional[int] = None
     notes: Optional[str] = None
+    photo_base64: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     status: str

@@ -29,10 +29,10 @@ export function SymptomsPage() {
               key={option.id}
               type="button"
               onClick={() => toggleSymptom(option.id)}
-              className={`min-h-14 rounded-2xl border-2 px-4 text-left text-lg font-semibold ${
+              className={`min-h-14 rounded-2xl border px-4 text-left font-ui text-lg font-semibold transition duration-200 hover:-translate-y-0.5 ${
                 selected
-                  ? 'border-emerald-800 bg-emerald-800 text-white'
-                  : 'border-stone-400 bg-white text-stone-900'
+                  ? 'border-[#262322] bg-[#262322] text-[#C1EDCC]'
+                  : 'border-stone-200 bg-white text-[#262322] hover:border-[#8fd6a0]'
               }`}
             >
               {option.label}

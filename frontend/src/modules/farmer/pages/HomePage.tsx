@@ -7,23 +7,25 @@ export function HomePage() {
   const { draft, updateDraft } = useFarmerReport()
 
   return (
-    <div className="flex min-h-[70vh] flex-col">
-      <h1 className="text-3xl font-extrabold text-stone-950">Report a livestock health issue</h1>
-      <p className="mt-3 text-lg leading-snug text-stone-800">
+    <div className="flex min-h-[60vh] flex-col">
+      <h1 className="font-display text-3xl font-extrabold tracking-tight text-[#262322]">
+        Report a livestock health issue
+      </h1>
+      <p className="mt-3 font-body text-lg leading-relaxed text-stone-600">
         PRANA is an early-warning tool. A report helps local teams watch for outbreaks. It is not a
         confirmed veterinary diagnosis.
       </p>
 
-      <label className="mt-6 block text-lg font-bold text-stone-900" htmlFor="farm-id">
+      <label className="mt-6 block font-heading text-lg font-bold text-[#262322]" htmlFor="farm-id">
         Farm ID
       </label>
       <input
         id="farm-id"
-        className="mt-2 min-h-14 w-full rounded-2xl border-2 border-stone-400 bg-white px-4 text-lg font-semibold"
+        className="prana-input mt-2 text-lg font-semibold"
         value={draft.farmId}
         onChange={(event) => updateDraft({ farmId: event.target.value })}
       />
-      <p className="mt-2 text-base text-stone-700">Demo farm ID is F001 if you are not sure.</p>
+      <p className="mt-2 font-body text-base text-stone-600">Demo farm ID is F001 if you are not sure.</p>
 
       <div className="mt-auto space-y-3 pt-8">
         <PrimaryButton onClick={() => navigate('/farmer/species')}>

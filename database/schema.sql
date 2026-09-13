@@ -126,6 +126,11 @@ CREATE TABLE IF NOT EXISTS health_events (
 
     notes TEXT,
 
+    -- Optional field photo captured by farmer/field worker, stored as a
+    -- base64 data URL. Additive column: nullable, no impact on existing
+    -- rows or on any query that doesn't reference it.
+    photo_base64 TEXT,
+
     latitude DOUBLE PRECISION,
     longitude DOUBLE PRECISION,
 

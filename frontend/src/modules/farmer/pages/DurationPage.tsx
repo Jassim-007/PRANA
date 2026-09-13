@@ -31,23 +31,23 @@ export function DurationPage() {
             key={preset.days}
             type="button"
             onClick={() => updateDraft({ durationDays: preset.days })}
-            className={`min-h-16 rounded-2xl border-2 text-lg font-bold ${
+            className={`min-h-16 rounded-2xl border font-heading text-lg font-bold transition duration-200 hover:-translate-y-0.5 ${
               draft.durationDays === preset.days
-                ? 'border-emerald-800 bg-emerald-800 text-white'
-                : 'border-stone-400 bg-white text-stone-900'
+                ? 'border-[#262322] bg-[#262322] text-[#C1EDCC]'
+                : 'border-stone-200 bg-white text-[#262322] hover:border-[#8fd6a0]'
             }`}
           >
             {preset.label}
           </button>
         ))}
       </div>
-      <label className="mt-5 block text-lg font-bold" htmlFor="duration-days">
+      <label className="mt-5 block font-heading text-lg font-bold" htmlFor="duration-days">
         Days
       </label>
       <input
         id="duration-days"
         inputMode="numeric"
-        className="mt-2 min-h-14 w-full rounded-2xl border-2 border-stone-400 bg-white px-4 text-2xl font-bold"
+        className="prana-input mt-2 font-display text-2xl font-bold"
         value={draft.durationDays}
         onChange={(event) => {
           const next = Number(event.target.value.replace(/[^\d]/g, ''))

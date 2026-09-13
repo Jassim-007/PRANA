@@ -16,8 +16,11 @@ export function FarmerProgress() {
   if (stepIndex < 0) return null
   const progress = ((stepIndex + 1) / STEPS.length) * 100
   return (
-    <div className="mt-3 h-2 overflow-hidden rounded-full bg-emerald-950">
-      <div className="h-full bg-lime-300" style={{ width: `${progress}%` }} />
+    <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
+      <div
+        className="progress-bar-fill h-full rounded-full bg-[#C1EDCC] transition-[width] duration-500"
+        style={{ width: `${progress}%` }}
+      />
     </div>
   )
 }

@@ -37,16 +37,16 @@ export function AssignedFarmsPage() {
       subtitle={`Worker ${workerId} — select a farm to start a health visit.`}
       backTo={FIELD_WORKER_BASE}
     >
-      {loading ? <p className="text-slate-300">Loading assigned farms…</p> : null}
+      {loading ? <p className="font-body text-stone-600">Loading assigned farms…</p> : null}
 
       {error ? (
-        <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4">
-          <p className="font-semibold text-rose-200">Could not load farms</p>
-          <p className="mt-1 text-sm text-rose-100">{error}</p>
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
+          <p className="font-heading font-semibold text-rose-900">Could not load farms</p>
+          <p className="mt-1 font-body text-sm text-rose-800">{error}</p>
           <button
             type="button"
             onClick={() => void loadFarms()}
-            className="mt-4 min-h-12 w-full rounded-xl bg-rose-400 px-4 font-bold text-slate-950"
+            className="prana-btn prana-btn-ink mt-4"
           >
             Retry
           </button>
@@ -54,7 +54,7 @@ export function AssignedFarmsPage() {
       ) : null}
 
       {!loading && !error && farms.length === 0 ? (
-        <p className="rounded-2xl bg-slate-900 p-4 text-slate-300">
+        <p className="prana-card p-4 font-body text-stone-600">
           No farms are assigned to this field worker yet.
         </p>
       ) : null}

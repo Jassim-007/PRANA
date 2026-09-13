@@ -14,6 +14,7 @@ export type HealthEventCreateRequest = {
   latitude: number
   longitude: number
   notes?: string
+  photo_base64?: string
 }
 
 export type HealthEventCreateResponse = {
@@ -21,10 +22,7 @@ export type HealthEventCreateResponse = {
   status: string
   message?: string
   created_at?: string
-  prediction?: AiPrediction
-  risk?: AiRisk
-  zoonotic?: AiZoonotic
-  explanation?: string[]
+  analysis?: AiAnalyzeResponse
 }
 
 export type AiPrediction = {

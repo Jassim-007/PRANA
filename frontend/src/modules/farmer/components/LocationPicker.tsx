@@ -56,8 +56,8 @@ export function LocationPicker({ latitude, longitude, onChange }: Props) {
   return (
     <div className="space-y-3">
       <PrimaryButton onClick={useMyLocation}>Use my current location</PrimaryButton>
-      <p className="text-base text-stone-700">Or tap the map to mark the farm / shed.</p>
-      <div className="h-64 overflow-hidden rounded-2xl border-2 border-stone-400">
+      <p className="font-body text-base text-stone-600">Or tap the map to mark the farm / shed.</p>
+      <div className="h-64 overflow-hidden rounded-2xl border border-stone-200 shadow-sm sm:h-80">
         <MapContainer
           center={center}
           zoom={hasPoint ? 15 : 8}
@@ -78,11 +78,11 @@ export function LocationPicker({ latitude, longitude, onChange }: Props) {
         </MapContainer>
       </div>
       {hasPoint ? (
-        <p className="text-base font-semibold text-stone-900">
+        <p className="font-ui text-base font-semibold text-[#262322]">
           Saved: {latitude.toFixed(5)}, {longitude.toFixed(5)}
         </p>
       ) : (
-        <p className="text-base font-semibold text-red-800">Location not selected yet.</p>
+        <p className="font-ui text-base font-semibold text-red-800">Location not selected yet.</p>
       )}
     </div>
   )

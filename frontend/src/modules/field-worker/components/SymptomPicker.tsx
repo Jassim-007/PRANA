@@ -24,10 +24,10 @@ export function SymptomPicker({ value, onChange }: SymptomPickerProps) {
             key={symptom}
             type="button"
             onClick={() => toggle(symptom)}
-            className={`min-h-11 rounded-full px-4 py-2 text-sm font-semibold ${
+            className={`min-h-11 rounded-full px-4 py-2 font-ui text-sm font-semibold transition duration-200 ${
               selected
-                ? 'bg-sky-400 text-slate-950'
-                : 'bg-slate-800 text-slate-100'
+                ? 'bg-[#C1EDCC] text-[#262322]'
+                : 'border border-stone-200 bg-white text-stone-700 hover:border-[#8fd6a0]'
             }`}
           >
             {SYMPTOM_LABELS[symptom]}

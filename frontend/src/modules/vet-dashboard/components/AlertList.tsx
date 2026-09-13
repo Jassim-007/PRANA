@@ -6,7 +6,7 @@ import { RiskBadge } from './RiskBadge'
 export function AlertList({ alerts }: { alerts: AlertItem[] }) {
   if (alerts.length === 0) {
     return (
-      <div className="rounded-lg border border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">
+      <div className="rounded-2xl border border-stone-200 bg-white px-4 py-8 text-center font-body text-sm text-stone-500">
         No active alerts returned by the API.
       </div>
     )
@@ -19,14 +19,14 @@ export function AlertList({ alerts }: { alerts: AlertItem[] }) {
         return (
           <article
             key={alert.id}
-            className={`rounded-lg border bg-white p-4 shadow-sm ${
-              priority ? 'border-red-200 ring-1 ring-red-100' : 'border-slate-200'
+            className={`rounded-2xl border bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md ${
+              priority ? 'border-red-200 ring-1 ring-red-100' : 'border-stone-200'
             }`}
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-semibold text-slate-900">{alert.title ?? 'Surveillance alert'}</h3>
+                  <h3 className="font-heading font-semibold text-[#262322]">{alert.title ?? 'Surveillance alert'}</h3>
                   <RiskBadge level={alert.risk_level ?? alert.severity} />
                   {alert.zoonotic ? (
                     <span className="rounded-full bg-fuchsia-50 px-2 py-0.5 text-xs font-semibold text-fuchsia-800 ring-1 ring-fuchsia-200">
@@ -34,11 +34,11 @@ export function AlertList({ alerts }: { alerts: AlertItem[] }) {
                     </span>
                   ) : null}
                 </div>
-                <p className="mt-1 text-sm text-slate-600">{alert.message ?? 'Review this signal as decision support.'}</p>
+                <p className="mt-1 font-body text-sm text-stone-600">{alert.message ?? 'Review this signal as decision support.'}</p>
               </div>
-              <p className="text-xs text-slate-500">{formatDate(alert.created_at)}</p>
+              <p className="font-ui text-xs text-stone-500">{formatDate(alert.created_at)}</p>
             </div>
-            <div className="mt-3 flex flex-wrap gap-4 text-xs uppercase tracking-wide text-slate-500">
+            <div className="mt-3 flex flex-wrap gap-4 font-ui text-xs uppercase tracking-wide text-stone-500">
               <span>{labelize(alert.type)}</span>
               <span>{labelize(alert.status)}</span>
               {alert.cluster_id ? (

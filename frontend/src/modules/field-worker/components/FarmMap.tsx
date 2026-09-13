@@ -23,7 +23,7 @@ type FarmMapProps = {
 
 export function FarmMap({ latitude, longitude, label }: FarmMapProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800">
+    <div className="overflow-hidden rounded-2xl border border-stone-200 shadow-sm">
       <MapContainer
         center={[latitude, longitude]}
         zoom={14}

@@ -12,17 +12,17 @@ export function PrimaryButton({
   ...props
 }: Props) {
   const styles = {
-    primary:
-      'bg-emerald-800 text-white hover:bg-emerald-900 disabled:bg-emerald-800/40',
+    primary: 'prana-btn prana-btn-primary disabled:opacity-40',
     secondary:
-      'bg-white text-emerald-900 border-2 border-emerald-800 hover:bg-emerald-50 disabled:opacity-50',
-    ghost: 'bg-transparent text-emerald-900 hover:bg-emerald-50 disabled:opacity-50',
+      'prana-btn border border-[#262322] bg-white text-[#262322] hover:bg-[#C1EDCC] disabled:opacity-50',
+    ghost:
+      'prana-btn bg-transparent text-[#262322] hover:bg-stone-100 disabled:opacity-50',
   }[variant]
 
   return (
     <button
       type="button"
-      className={`min-h-14 w-full rounded-2xl px-5 text-lg font-semibold shadow-sm transition ${styles} ${className}`}
+      className={`w-full sm:w-auto min-h-10 px-4 sm:px-5 text-sm sm:text-base ${styles} ${className}`}
       {...props}
     >
       {children}

@@ -6,7 +6,7 @@ export function RiskBadge({ level }: { level?: string | null }) {
   const risk = asRiskLevel(level)
   if (!risk) {
     return (
-      <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200">
+      <span className="inline-flex rounded-full bg-stone-100 px-2.5 py-0.5 font-ui text-xs font-medium text-stone-600 ring-1 ring-stone-200">
         Not assessed
       </span>
     )
@@ -14,7 +14,7 @@ export function RiskBadge({ level }: { level?: string | null }) {
 
   return (
     <span
-      className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ${RISK_BADGE_CLASS[risk as RiskLevel]}`}
+      className={`inline-flex rounded-full px-2.5 py-0.5 font-ui text-xs font-semibold ring-1 ${RISK_BADGE_CLASS[risk as RiskLevel]}`}
     >
       {risk}
     </span>

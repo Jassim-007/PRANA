@@ -38,26 +38,26 @@ export function FeedbackForm({ eventId }: { eventId: string }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-      <h3 className="text-sm font-semibold text-slate-900">Veterinary review</h3>
-      <p className="mt-1 text-xs text-slate-500">
+    <form onSubmit={onSubmit} className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
+      <h3 className="font-heading text-sm font-semibold text-[#262322]">Veterinary review</h3>
+      <p className="mt-1 font-body text-xs text-stone-500">
         Record a decision-support review. This does not issue a confirmed diagnosis.
       </p>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <label className="text-sm">
-          <span className="mb-1 block text-xs font-medium uppercase text-slate-500">Officer ID</span>
+          <span className="mb-1 block font-ui text-xs font-medium uppercase tracking-[0.12em] text-stone-500">Officer ID</span>
           <input
-            className="w-full rounded-md border border-slate-300 px-3 py-2"
+            className="prana-input"
             value={vetId}
             onChange={(e) => setVetId(e.target.value)}
             required
           />
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-xs font-medium uppercase text-slate-500">Decision</span>
+          <span className="mb-1 block font-ui text-xs font-medium uppercase tracking-[0.12em] text-stone-500">Decision</span>
           <select
-            className="w-full rounded-md border border-slate-300 px-3 py-2"
+            className="prana-select"
             value={decision}
             onChange={(e) => setDecision(e.target.value as FeedbackDecision)}
           >
@@ -69,17 +69,17 @@ export function FeedbackForm({ eventId }: { eventId: string }) {
           </select>
         </label>
         <label className="text-sm md:col-span-2">
-          <span className="mb-1 block text-xs font-medium uppercase text-slate-500">Notes</span>
+          <span className="mb-1 block font-ui text-xs font-medium uppercase tracking-[0.12em] text-stone-500">Notes</span>
           <textarea
-            className="min-h-20 w-full rounded-md border border-slate-300 px-3 py-2"
+            className="prana-textarea"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />
         </label>
         <label className="text-sm md:col-span-2">
-          <span className="mb-1 block text-xs font-medium uppercase text-slate-500">Action taken</span>
+          <span className="mb-1 block font-ui text-xs font-medium uppercase tracking-[0.12em] text-stone-500">Action taken</span>
           <textarea
-            className="min-h-20 w-full rounded-md border border-slate-300 px-3 py-2"
+            className="prana-textarea"
             value={actionTaken}
             onChange={(e) => setActionTaken(e.target.value)}
           />
@@ -89,7 +89,7 @@ export function FeedbackForm({ eventId }: { eventId: string }) {
       <button
         type="submit"
         disabled={saving}
-        className="mt-4 rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
+        className="prana-btn prana-btn-ink mt-4 w-auto min-h-11 px-5 text-sm"
       >
         {saving ? 'Recording…' : 'Record review'}
       </button>

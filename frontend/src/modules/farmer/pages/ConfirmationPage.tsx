@@ -20,26 +20,26 @@ export function ConfirmationPage() {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border-2 border-emerald-800 bg-white p-4">
-        <p className="text-sm font-bold uppercase tracking-wide text-emerald-800">Report received</p>
-        <h1 className="mt-1 text-3xl font-extrabold text-stone-950">Thank you</h1>
-        <p className="mt-2 text-lg text-stone-800">
+      <div className="animate-scale-in rounded-2xl border border-[#8fd6a0] bg-[#C1EDCC]/20 p-5">
+        <p className="font-ui text-xs font-bold uppercase tracking-[0.18em] text-emerald-800">Report received</p>
+        <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight text-[#262322]">Thank you</h1>
+        <p className="mt-2 font-body text-lg text-stone-600">
           Your health event was submitted. A field team can use this as an early-warning signal.
         </p>
-        <p className="mt-3 text-lg font-semibold text-stone-950">Event ID: {event.id}</p>
-        <p className="text-base text-stone-700">Status: {event.status}</p>
+        <p className="mt-3 font-heading text-lg font-semibold text-[#262322]">Event ID: {event.id}</p>
+        <p className="font-ui text-base text-stone-600">Status: {event.status}</p>
       </div>
 
       {analysis ? (
-        <div className="rounded-2xl border-2 border-stone-300 bg-white p-4">
-          <p className="text-sm font-bold uppercase tracking-wide text-stone-600">Decision support</p>
-          <p className="mt-2 text-base font-semibold text-red-900">
+        <div className="animate-fade-up rounded-2xl border border-stone-200 bg-white p-5 [animation-delay:80ms]">
+          <p className="font-ui text-xs font-bold uppercase tracking-[0.18em] text-stone-500">Decision support</p>
+          <p className="mt-2 font-body text-base font-semibold text-red-900">
             This is not a confirmed diagnosis. It is only decision support for further checking.
           </p>
-          <p className="mt-3 text-xl font-bold text-stone-950">
+          <p className="mt-3 font-heading text-xl font-bold text-[#262322]">
             Possible concern: {analysis.prediction.disease}
           </p>
-          <p className="text-base text-stone-800">
+          <p className="font-ui text-base text-stone-600">
             Confidence: {Math.round(analysis.prediction.confidence * 100)}%
           </p>
           {riskLevel ? (
@@ -57,7 +57,7 @@ export function ConfirmationPage() {
             </p>
           ) : null}
           {analysis.explanation.length > 0 ? (
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-base text-stone-800">
+            <ul className="mt-3 list-disc space-y-1 pl-5 font-body text-base text-stone-700">
               {analysis.explanation.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -65,7 +65,7 @@ export function ConfirmationPage() {
           ) : null}
         </div>
       ) : (
-        <p className="rounded-2xl bg-white p-4 text-lg text-stone-800">
+        <p className="rounded-2xl border border-stone-200 bg-white p-4 font-body text-lg text-stone-600">
           The report was saved. No extra risk summary was returned by the server.
         </p>
       )}

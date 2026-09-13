@@ -40,18 +40,16 @@ export function ReviewPage() {
   if (notes) {
     payload.notes = notes
   }
+  if (draft.photoDataUrl) {
+    payload.photo_base64 = draft.photoDataUrl
+  }
 
   try {
     const event = await createHealthEvent(payload)
 
-const analysis = {
-  prediction: event.prediction ?? { disease: 'Unknown', confidence: 0 },
-  risk: event.risk ?? { score: 0, level: 'LOW' },
-  zoonotic: event.zoonotic ?? { flag: false },
-  explanation: event.explanation ?? [],
-}
+const analysis = event.analysis ?? null
 
-    setResult({ event, analysis })
+setResult({ event, analysis })
     navigate('/farmer/confirmation')
   } catch (err) {
     setError(
@@ -71,7 +69,7 @@ const analysis = {
         backTo="/farmer/details"
         step={7}
       />
-      <dl className="space-y-3 rounded-2xl border-2 border-stone-300 bg-white p-4 text-lg">
+      <dl className="space-y-3 rounded-2xl border border-stone-200 bg-stone-50 p-4 font-body text-lg sm:p-5">
         <Row label="Farm" value={draft.farmId} />
         <Row label="Species" value={speciesLabel(draft.species)} />
         <Row label="Signs" value={draft.symptoms.join(', ')} />
@@ -84,8 +82,13 @@ const analysis = {
         />
         {notesRow(draft.notes)}
       </dl>
+      {draft.photoDataUrl ? (
+        <div className="mt-4 overflow-hidden rounded-2xl border border-stone-200">
+          <img src={draft.photoDataUrl} alt="Attached" className="max-h-56 w-full object-cover" />
+        </div>
+      ) : null}
       {error ? (
-        <p className="mt-4 rounded-2xl bg-red-100 p-3 text-base font-semibold text-red-900">{error}</p>
+        <p className="mt-4 rounded-2xl bg-red-50 p-3 font-ui text-base font-semibold text-red-900">{error}</p>
       ) : null}
       <div className="mt-6">
         <PrimaryButton disabled={submitting} onClick={() => void submit()}>
@@ -99,8 +102,8 @@ const analysis = {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-sm font-bold uppercase tracking-wide text-stone-600">{label}</dt>
-      <dd className="font-semibold text-stone-950">{value}</dd>
+      <dt className="font-ui text-xs font-bold uppercase tracking-[0.16em] text-stone-500">{label}</dt>
+      <dd className="font-heading font-semibold text-[#262322]">{value}</dd>
     </div>
   )
 }

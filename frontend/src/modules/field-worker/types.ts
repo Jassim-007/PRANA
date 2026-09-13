@@ -86,6 +86,12 @@ export type HealthEventCreateResponse = {
   status: string
   message?: string
   created_at?: string
+  analysis?: {
+    prediction: { disease: string; confidence: number }
+    risk: { score: number; level: string }
+    zoonotic: { flag: boolean }
+    explanation: string[]
+  }
 }
 
 export type VisitStatus = 'not_started' | 'in_progress' | 'submitted'

@@ -53,6 +53,8 @@ def list_health_events(
     event_type: str | None = None,
     status: str | None = None,
     farm_id: UUID | None = None,
+    risk_level: str | None = None,
+    district: str | None = None,
 ) -> list[dict]:
     filters = []
     params: list = []
@@ -72,6 +74,12 @@ def list_health_events(
     if farm_id:
         filters.append("he.farm_id = %s")
         params.append(farm_id)
+    if risk_level:
+        filters.append("ap.risk_level = %s")
+        params.append(risk_level)
+    if district:
+        filters.append("f.district = %s")
+        params.append(district)
 
     where_sql = f"WHERE {' AND '.join(filters)}" if filters else ""
 
@@ -79,6 +87,7 @@ def list_health_events(
         SELECT
             he.id,
             he.farm_id,
+            f.name AS farm_name,
             he.source,
             he.species,
             he.event_type,
@@ -90,8 +99,22 @@ def list_health_events(
             he.latitude,
             he.longitude,
             he.status,
-            he.created_at
+            he.created_at,
+            ap.disease,
+            ap.confidence,
+            ap.risk_score,
+            ap.risk_level,
+            ap.zoonotic_flag,
+            ap.explanation
         FROM health_events he
+        LEFT JOIN farms f ON f.id = he.farm_id
+        LEFT JOIN LATERAL (
+            SELECT disease, confidence, risk_score, risk_level, zoonotic_flag, explanation
+            FROM ai_predictions
+            WHERE health_event_id = he.id
+            ORDER BY created_at DESC
+            LIMIT 1
+        ) ap ON TRUE
         {where_sql}
         ORDER BY he.created_at DESC
     """
@@ -101,11 +124,43 @@ def list_health_events(
             with conn.cursor() as cur:
                 cur.execute(query, params)
                 rows = cur.fetchall()
-        return [_map_event_row(row) for row in rows]
+        return [_map_event_row_with_ai(row) for row in rows]
     except Exception as exc:
         logger.exception("Failed to list health events")
         raise_database_http_error(exc, "Could not load health events")
 
+
+
+def _map_event_row_with_ai(row) -> dict:
+    payload = {
+        "id": str(row[0]),
+        "farm_id": str(row[1]),
+        "farm_name": row[2],
+        "source": row[3],
+        "species": row[4],
+        "event_type": row[5],
+        "symptoms": row[6] or [],
+        "affected_count": row[7],
+        "death_count": row[8],
+        "duration_days": row[9],
+        "notes": row[10],
+        "latitude": row[11],
+        "longitude": row[12],
+        "status": row[13],
+        "created_at": row[14].isoformat() if row[14] else None,
+    }
+    if row[15] is not None:
+        payload.update(
+            {
+                "possible_disease": row[15],
+                "risk_level": row[18],
+                "risk_score": row[17],
+                "ai_confidence": row[16],
+                "zoonotic_flag": row[19],
+                "explanation": row[20] or [],
+            }
+        )
+    return payload
 
 def get_health_event(event_id: UUID) -> dict | None:
     query = """
@@ -217,12 +272,13 @@ def _insert_health_event(conn, event: HealthEventCreate) -> dict:
             death_count,
             duration_days,
             notes,
+            photo_base64,
             latitude,
             longitude
         )
         VALUES (
             %s, %s, %s, %s, %s::jsonb,
-            %s, %s, %s, %s, %s, %s
+            %s, %s, %s, %s, %s, %s, %s
         )
         RETURNING id, status, created_at, farm_id, affected_count, latitude, longitude
     """
@@ -240,6 +296,7 @@ def _insert_health_event(conn, event: HealthEventCreate) -> dict:
                 event.death_count,
                 event.duration_days,
                 event.notes,
+                event.photo_base64,
                 event.latitude,
                 event.longitude,
             ),

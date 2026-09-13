@@ -150,11 +150,11 @@ export function FarmVisitPage() {
     >
       <form onSubmit={handleSubmit} className="grid gap-6">
         <section>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="mb-2 font-ui text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Species
           </h2>
           <select
-            className="h-14 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 text-lg text-white"
+            className="prana-select text-lg"
             value={form.species}
             onChange={(event) => setForm((current) => ({ ...current, species: event.target.value }))}
           >
@@ -167,7 +167,7 @@ export function FarmVisitPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="mb-2 font-ui text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Health event
           </h2>
           <EventTypePicker
@@ -177,7 +177,7 @@ export function FarmVisitPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="mb-2 font-ui text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Symptoms
           </h2>
           <SymptomPicker
@@ -198,7 +198,7 @@ export function FarmVisitPage() {
         />
 
         <section>
-          <label htmlFor="duration" className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <label htmlFor="duration" className="font-ui text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Duration (days)
           </label>
           <input
@@ -206,7 +206,7 @@ export function FarmVisitPage() {
             type="number"
             min={0}
             inputMode="numeric"
-            className="mt-2 h-14 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 text-lg text-white"
+            className="prana-input mt-2 text-lg"
             value={form.duration_days}
             onChange={(event) =>
               setForm((current) => ({ ...current, duration_days: event.target.value }))
@@ -215,7 +215,7 @@ export function FarmVisitPage() {
         </section>
 
         <section className="grid gap-2">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="font-ui text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Treatment context
           </h2>
           {(
@@ -226,7 +226,7 @@ export function FarmVisitPage() {
               ['treatment_unsuccessful', 'Treatment unsuccessful'],
             ] as const
           ).map(([key, label]) => (
-            <label key={key} className="flex min-h-14 items-center gap-3 rounded-xl bg-slate-900 px-4">
+            <label key={key} className="flex min-h-14 items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 transition hover:border-[#8fd6a0]">
               <input
                 type="checkbox"
                 className="h-5 w-5"
@@ -241,13 +241,13 @@ export function FarmVisitPage() {
         </section>
 
         <section>
-          <label htmlFor="notes" className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <label htmlFor="notes" className="font-ui text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Observations / notes
           </label>
           <textarea
             id="notes"
             rows={4}
-            className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-base text-white"
+            className="prana-textarea mt-2"
             placeholder="What did you observe during this visit?"
             value={form.notes}
             onChange={(event) => setForm((current) => ({ ...current, notes: event.target.value }))}
@@ -255,14 +255,14 @@ export function FarmVisitPage() {
         </section>
 
         <section className="grid gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="font-ui text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Location
           </h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <input
               aria-label="Latitude"
               placeholder="Latitude"
-              className="h-14 rounded-xl border border-slate-700 bg-slate-900 px-4 text-white"
+              className="prana-input"
               value={form.latitude}
               onChange={(event) =>
                 setForm((current) => ({ ...current, latitude: event.target.value }))
@@ -271,7 +271,7 @@ export function FarmVisitPage() {
             <input
               aria-label="Longitude"
               placeholder="Longitude"
-              className="h-14 rounded-xl border border-slate-700 bg-slate-900 px-4 text-white"
+              className="prana-input"
               value={form.longitude}
               onChange={(event) =>
                 setForm((current) => ({ ...current, longitude: event.target.value }))
@@ -281,21 +281,21 @@ export function FarmVisitPage() {
           <button
             type="button"
             onClick={captureGps}
-            className="min-h-12 rounded-xl bg-slate-800 font-semibold text-white"
+            className="prana-btn prana-btn-ink min-h-12"
           >
             Use current GPS
           </button>
-          {gpsMessage ? <p className="text-sm text-slate-400">{gpsMessage}</p> : null}
+          {gpsMessage ? <p className="font-body text-sm text-stone-500">{gpsMessage}</p> : null}
         </section>
 
         {error ? (
-          <p className="rounded-xl bg-rose-500/15 p-3 text-sm text-rose-200">{error}</p>
+          <p className="rounded-xl bg-rose-50 p-3 font-body text-sm text-rose-800">{error}</p>
         ) : null}
 
         <button
           type="submit"
           disabled={!canSubmit || submitting}
-          className="min-h-16 rounded-2xl bg-emerald-500 text-lg font-bold text-slate-950 disabled:opacity-50"
+          className="prana-btn prana-btn-primary disabled:opacity-50"
         >
           {submitting ? 'Submitting…' : 'Submit visit / health event'}
         </button>

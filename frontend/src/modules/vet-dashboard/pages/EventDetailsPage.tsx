@@ -65,12 +65,12 @@ export function EventDetailsPage() {
 
   return (
     <div className="space-y-4">
-      <Link to="/vet/events" className="text-sm text-emerald-800 hover:underline">
+      <Link to="/vet/events" className="font-ui text-sm text-emerald-800 hover:underline">
         ← Health events
       </Link>
       <div>
-        <h2 className="text-2xl font-semibold text-slate-900">Event details</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[#262322]">Event details</h2>
+        <p className="mt-1 font-body text-sm text-stone-600">
           AI assessment is decision support only. Possible disease is not a confirmed diagnosis.
         </p>
       </div>
@@ -80,9 +80,9 @@ export function EventDetailsPage() {
       {event ? (
         <>
           <section className="grid gap-4 lg:grid-cols-3">
-            <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
+            <article className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm lg:col-span-2 sm:p-5">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-lg font-semibold">{farm?.name ?? event.farm_name ?? event.farm_id}</h3>
+                <h3 className="font-heading text-lg font-semibold">{farm?.name ?? event.farm_name ?? event.farm_id}</h3>
                 <RiskBadge level={event.risk_level} />
                 {event.zoonotic_flag ? (
                   <span className="rounded-full bg-fuchsia-50 px-2 py-0.5 text-xs font-semibold text-fuchsia-800 ring-1 ring-fuchsia-200">
@@ -90,7 +90,7 @@ export function EventDetailsPage() {
                   </span>
                 ) : null}
               </div>
-              <dl className="mt-4 grid gap-3 sm:grid-cols-2 text-sm">
+              <dl className="mt-4 grid gap-3 font-body text-sm sm:grid-cols-2">
                 <Detail label="Date" value={formatDate(event.created_at)} />
                 <Detail label="Source" value={labelize(event.source)} />
                 <Detail label="Species" value={labelize(event.species)} />
@@ -110,20 +110,20 @@ export function EventDetailsPage() {
                 />
               </dl>
               <div className="mt-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">AI explanation</p>
+                <p className="font-ui text-xs font-semibold uppercase tracking-wide text-stone-500">AI explanation</p>
                 {explanationList(event.explanation).length ? (
-                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
+                  <ul className="mt-2 list-disc space-y-1 pl-5 font-body text-sm text-stone-700">
                     {explanationList(event.explanation).map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="mt-2 text-sm text-slate-500">No explanation provided yet.</p>
+                  <p className="mt-2 font-body text-sm text-stone-500">No explanation provided yet.</p>
                 )}
               </div>
               <div className="mt-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Notes</p>
-                <p className="mt-2 text-sm text-slate-700">{event.notes || '—'}</p>
+                <p className="font-ui text-xs font-semibold uppercase tracking-wide text-stone-500">Notes</p>
+                <p className="mt-2 font-body text-sm text-stone-700">{event.notes || '—'}</p>
               </div>
             </article>
             <FeedbackForm eventId={event.id} />
@@ -138,8 +138,8 @@ export function EventDetailsPage() {
 function Detail({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs uppercase tracking-wide text-slate-500">{label}</dt>
-      <dd className="mt-0.5 font-medium text-slate-900">{value}</dd>
+      <dt className="font-ui text-xs uppercase tracking-wide text-stone-500">{label}</dt>
+      <dd className="mt-0.5 font-heading font-medium text-[#262322]">{value}</dd>
     </div>
   )
 }

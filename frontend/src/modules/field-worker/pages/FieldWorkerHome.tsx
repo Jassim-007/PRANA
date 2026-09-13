@@ -16,18 +16,18 @@ export function FieldWorkerHome() {
       title="Field worker home"
       subtitle="Active farm surveillance — record health events even when farmers have not reported."
     >
-      <section className="rounded-2xl bg-slate-900 p-4">
-        <label htmlFor="worker-id" className="text-sm font-medium text-slate-300">
+      <section className="prana-card p-4 sm:p-5">
+        <label htmlFor="worker-id" className="font-ui text-sm font-medium text-stone-600">
           Field worker ID
         </label>
         <input
           id="worker-id"
           value={workerId}
           onChange={(event) => setWorkerId(event.target.value)}
-          className="mt-2 h-14 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 text-lg text-white"
+          className="prana-input mt-2 text-lg"
           placeholder="FW001"
         />
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 font-body text-xs text-stone-500">
           Authentication is not part of this MVP. Use your assigned worker ID to load farms.
         </p>
       </section>
@@ -35,7 +35,7 @@ export function FieldWorkerHome() {
       <div className="mt-6 grid gap-3">
         <Link
           to={`${FIELD_WORKER_BASE}/farms`}
-          className="flex min-h-16 items-center justify-center rounded-2xl bg-emerald-500 px-4 text-lg font-bold text-slate-950"
+          className="prana-btn prana-btn-primary"
         >
           View assigned farms
         </Link>

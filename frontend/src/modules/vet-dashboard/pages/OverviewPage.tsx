@@ -72,8 +72,8 @@ export function OverviewPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-semibold text-slate-900">Surveillance overview</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[#262322]">Surveillance overview</h2>
+        <p className="mt-1 font-body text-sm text-stone-600">
           Operational picture for veterinary officers. Figures support triage; they are not a confirmed diagnosis.
         </p>
       </div>
@@ -92,29 +92,29 @@ export function OverviewPage() {
       />
 
       <section className="grid gap-6 lg:grid-cols-3">
-        <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
-          <h3 className="text-sm font-semibold text-slate-900">Health event trend</h3>
-          <p className="text-xs text-slate-500">Daily counts from /api/dashboard/trends</p>
+        <article className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm lg:col-span-2">
+          <h3 className="font-heading text-sm font-semibold text-[#262322]">Health event trend</h3>
+          <p className="font-body text-xs text-stone-500">Daily counts from /api/dashboard/trends</p>
           {trends.length === 0 ? (
-            <p className="mt-6 text-sm text-slate-500">No trend series available yet.</p>
+            <p className="mt-6 font-body text-sm text-stone-500">No trend series available yet.</p>
           ) : (
             <div className="mt-4 flex h-40 items-end gap-2">
               {trends.map((point) => (
                 <div key={point.date} className="flex flex-1 flex-col items-center justify-end gap-1">
                   <div
-                    className="w-full rounded-t bg-emerald-700"
+                    className="w-full rounded-t bg-[#262322] transition-all duration-500"
                     style={{ height: `${Math.max(8, (point.event_count / maxTrend) * 100)}%` }}
                     title={`${point.date}: ${point.event_count}`}
                   />
-                  <span className="text-[10px] text-slate-500">{point.date.slice(5)}</span>
+                  <span className="font-ui text-[10px] text-stone-500">{point.date.slice(5)}</span>
                 </div>
               ))}
             </div>
           )}
         </article>
-        <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-          <h3 className="text-sm font-semibold text-slate-900">Attention queue</h3>
-          <ul className="mt-3 space-y-2 text-sm">
+        <article className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+          <h3 className="font-heading text-sm font-semibold text-[#262322]">Attention queue</h3>
+          <ul className="mt-3 space-y-2 font-body text-sm">
             <li>
               <Link className="text-emerald-800 hover:underline" to="/vet/alerts">
                 Review high-risk, zoonotic, and cluster alerts

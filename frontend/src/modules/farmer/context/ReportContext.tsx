@@ -55,7 +55,13 @@ export function ReportProvider({ children }: { children: ReactNode }) {
   const value = useMemo<ReportContextValue>(() => {
     const persist = (next: FarmerReportDraft) => {
       setDraft(next)
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+      } catch {
+        // Storage quota exceeded (e.g. a very large photo) — keep the
+        // draft in memory so the current session still works, just
+        // without cross-refresh persistence for this update.
+      }
     }
 
     return {

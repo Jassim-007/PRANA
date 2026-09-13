@@ -28,12 +28,16 @@ def get_health_events(
     source: str | None = Query(default=None),
     event_type: str | None = Query(default=None),
     status: str | None = Query(default=None),
+    risk_level: str | None = Query(default=None),
+    district: str | None = Query(default=None),
 ):
     return list_health_events(
         species=species,
         source=source,
         event_type=event_type,
         status=status,
+        risk_level=risk_level,
+        district=district,
     )
 
 

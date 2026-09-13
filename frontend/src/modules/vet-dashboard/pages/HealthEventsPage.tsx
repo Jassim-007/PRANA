@@ -56,16 +56,16 @@ export function HealthEventsPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-2xl font-semibold text-slate-900">Health events</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[#262322]">Health events</h2>
+        <p className="mt-1 font-body text-sm text-stone-600">
           {followUp.length} record(s) may need field follow-up based on open status or elevated risk level.
         </p>
       </div>
 
-      <div className="grid gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-4">
+      <div className="grid gap-3 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm md:grid-cols-4">
         <label className="text-sm">
-          <span className="mb-1 block text-xs uppercase text-slate-500">Species</span>
-          <select className="w-full rounded-md border border-slate-300 px-3 py-2" value={species} onChange={(e) => setSpecies(e.target.value)}>
+          <span className="mb-1 block font-ui text-xs uppercase tracking-[0.12em] text-stone-500">Species</span>
+          <select className="prana-select min-h-11" value={species} onChange={(e) => setSpecies(e.target.value)}>
             <option value="">All</option>
             <option value="cattle">cattle</option>
             <option value="buffalo">buffalo</option>
@@ -75,8 +75,8 @@ export function HealthEventsPage() {
           </select>
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-xs uppercase text-slate-500">Risk level</span>
-          <select className="w-full rounded-md border border-slate-300 px-3 py-2" value={riskLevel} onChange={(e) => setRiskLevel(e.target.value)}>
+          <span className="mb-1 block font-ui text-xs uppercase tracking-[0.12em] text-stone-500">Risk level</span>
+          <select className="prana-select min-h-11" value={riskLevel} onChange={(e) => setRiskLevel(e.target.value)}>
             <option value="">All</option>
             {RISK_LEVELS.map((level) => (
               <option key={level} value={level}>
@@ -86,8 +86,8 @@ export function HealthEventsPage() {
           </select>
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-xs uppercase text-slate-500">Source</span>
-          <select className="w-full rounded-md border border-slate-300 px-3 py-2" value={source} onChange={(e) => setSource(e.target.value)}>
+          <span className="mb-1 block font-ui text-xs uppercase tracking-[0.12em] text-stone-500">Source</span>
+          <select className="prana-select min-h-11" value={source} onChange={(e) => setSource(e.target.value)}>
             <option value="">All</option>
             <option value="farmer">farmer</option>
             <option value="field_worker">field_worker</option>
@@ -95,8 +95,8 @@ export function HealthEventsPage() {
           </select>
         </label>
         <label className="text-sm">
-          <span className="mb-1 block text-xs uppercase text-slate-500">Status</span>
-          <select className="w-full rounded-md border border-slate-300 px-3 py-2" value={status} onChange={(e) => setStatus(e.target.value)}>
+          <span className="mb-1 block font-ui text-xs uppercase tracking-[0.12em] text-stone-500">Status</span>
+          <select className="prana-select min-h-11" value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="">All</option>
             <option value="open">open</option>
             <option value="investigating">investigating</option>

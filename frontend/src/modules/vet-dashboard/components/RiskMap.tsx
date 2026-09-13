@@ -37,15 +37,15 @@ export function RiskMap({
       : DEFAULT_MAP_CENTER
 
   return (
-    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 px-4 py-3">
+    <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 px-4 py-3">
         <div>
-          <h2 className="text-sm font-semibold text-slate-900">Geographical risk map</h2>
-          <p className="text-xs text-slate-500">OpenStreetMap tiles. Marker colours reflect operational risk levels, not clinical validation.</p>
+          <h2 className="font-heading text-sm font-semibold text-[#262322]">Geographical risk map</h2>
+          <p className="font-body text-xs text-stone-500">OpenStreetMap tiles. Marker colours reflect operational risk levels, not clinical validation.</p>
         </div>
-        <div className="flex flex-wrap gap-2 text-[11px] font-medium">
+        <div className="flex flex-wrap gap-2 font-ui text-[11px] font-medium">
           {Object.entries(RISK_COLORS).map(([level, color]) => (
-            <span key={level} className="inline-flex items-center gap-1.5 text-slate-600">
+            <span key={level} className="inline-flex items-center gap-1.5 text-stone-600">
               <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
               {level}
             </span>

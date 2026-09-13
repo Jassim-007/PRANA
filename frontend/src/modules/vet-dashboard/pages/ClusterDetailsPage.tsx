@@ -62,12 +62,12 @@ export function ClusterDetailsPage() {
 
   return (
     <div className="space-y-4">
-      <Link to="/vet/map" className="text-sm text-emerald-800 hover:underline">
+      <Link to="/vet/map" className="font-ui text-sm text-emerald-800 hover:underline">
         ← Risk map
       </Link>
       <div>
-        <h2 className="text-2xl font-semibold text-slate-900">Potential outbreak cluster</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[#262322]">Potential outbreak cluster</h2>
+        <p className="mt-1 font-body text-sm text-stone-600">
           Geographical grouping of similar health events. This is a potential pattern for investigation, not a guaranteed outbreak.
         </p>
       </div>
@@ -76,27 +76,27 @@ export function ClusterDetailsPage() {
 
       {cluster ? (
         <>
-          <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+          <section className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-semibold">{cluster.disease ?? 'Unspecified possible disease'}</h3>
+              <h3 className="font-heading text-lg font-semibold">{cluster.disease ?? 'Unspecified possible disease'}</h3>
               <RiskBadge level={cluster.risk_level} />
             </div>
-            <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+            <dl className="mt-4 grid gap-3 font-body text-sm sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <dt className="text-xs uppercase text-slate-500">Cluster ID</dt>
-                <dd className="font-medium">{cluster.id}</dd>
+                <dt className="font-ui text-xs uppercase text-stone-500">Cluster ID</dt>
+                <dd className="font-heading font-medium">{cluster.id}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase text-slate-500">Event count</dt>
-                <dd className="font-medium">{formatNumber(cluster.event_count)}</dd>
+                <dt className="font-ui text-xs uppercase text-stone-500">Event count</dt>
+                <dd className="font-heading font-medium">{formatNumber(cluster.event_count)}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase text-slate-500">Affected count</dt>
-                <dd className="font-medium">{formatNumber(cluster.affected_count)}</dd>
+                <dt className="font-ui text-xs uppercase text-stone-500">Affected count</dt>
+                <dd className="font-heading font-medium">{formatNumber(cluster.affected_count)}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase text-slate-500">Radius</dt>
-                <dd className="font-medium">{cluster.radius_km != null ? `${cluster.radius_km} km` : '—'}</dd>
+                <dt className="font-ui text-xs uppercase text-stone-500">Radius</dt>
+                <dd className="font-heading font-medium">{cluster.radius_km != null ? `${cluster.radius_km} km` : '—'}</dd>
               </div>
             </dl>
           </section>

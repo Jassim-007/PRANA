@@ -44,8 +44,8 @@ export function AlertsPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-2xl font-semibold text-slate-900">Alerts</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[#262322]">Alerts</h2>
+        <p className="mt-1 font-body text-sm text-stone-600">
           Highlighted items include high/critical risk, zoonotic flags, and geographical cluster signals.
         </p>
       </div>
